@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package roerobot;
+package Communication;
 
 import java.io.IOException;
 
@@ -18,22 +18,27 @@ import com.pi4j.platform.PlatformManager;
 import com.pi4j.util.Console;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap.Byte0.runnable;
 
 /**
- *
+ *  This opens, maintains and handles the communication and connection to the Arduinos in use, via I2C protocol.
  * @author PerEspen
  */
-public class I2C implements Runnable{
+public class I2Cdev implements Runnable{
 
     //I2C addresses for devices on bus
     public static final int ARD_ELEV_ADDR = 0x01;
     public static final int ARD_ROBOT_ADDR = 0x02;
+    
+    //
+    public static boolean elevatorFlag = false;
+    public static boolean roerobotFlag = false;
+    
     //I2C bus line used(on odroid)
     public static final int I2CBUS = 4;
 
     public I2CDevice ardElevator = null;
     public I2CDevice ardRobot = null;
+    
 
     
     
@@ -44,9 +49,8 @@ public class I2C implements Runnable{
     public void run() {
         
         ardElevator = initiate(I2CBUS, ARD_ELEV_ADDR);
-        ardRobot = initiate(I2CBUS, ARD_ELEV_ADDR);
         
-        
+             
     }
 
     
@@ -67,7 +71,7 @@ public class I2C implements Runnable{
             PlatformManager.setPlatform(Platform.ODROID);
             
         } catch (PlatformAlreadyAssignedException expl) {
-            Logger.getLogger(I2C.class.getName()).log(Level.SEVERE, null, expl);
+            Logger.getLogger(I2Cdev.class.getName()).log(Level.SEVERE, null, expl);
             System.out.println(expl.getCause().toString());
         }
         try {
@@ -75,13 +79,15 @@ public class I2C implements Runnable{
             I2CBus i2c = I2CFactory.getInstance(I2CbusNr);
             i2cDevice = i2c.getDevice(addrNr);
         } catch (UnsupportedBusNumberException exdev) {
-            Logger.getLogger(I2C.class.getName()).log(Level.SEVERE, null, exdev);
+            Logger.getLogger(I2Cdev.class.getName()).log(Level.SEVERE, null, exdev);
             System.out.println(exdev.getCause().toString());
         } catch (IOException exio) {
-            Logger.getLogger(I2C.class.getName()).log(Level.SEVERE, null, exio);
+            Logger.getLogger(I2Cdev.class.getName()).log(Level.SEVERE, null, exio);
             System.out.println(exio.getCause().toString());
         }
 
         return i2cDevice;
     }
+    
+
 }

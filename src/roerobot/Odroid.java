@@ -5,10 +5,22 @@
  */
 package roerobot;
 
+import Communication.I2Cdev;
+
 /**
  *
  * @author PerEspen
  */
 public class Odroid {
     
+    I2Cdev arduinoElevator;
+    I2Cdev arduinoRobot;
+    public void run()
+    {
+        arduinoElevator.initiate(I2Cdev.I2CBUS, I2Cdev.ARD_ELEV_ADDR);
+       
+        arduinoRobot.initiate(I2Cdev.I2CBUS, I2Cdev.ARD_ROBOT_ADDR);
+        arduinoRobot.ardRobot.read();
+    }
+
 }
