@@ -27,9 +27,9 @@ public class Communication {
         
         if(x_newValue_Robot != x_lastValue_Robot)
         { 
-            updateinterface
-                }           
-         i2cdevices.ardElevator.
+           
+        }           
+
     }
     
 }
