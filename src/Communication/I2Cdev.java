@@ -29,13 +29,11 @@ public class I2Cdev implements Runnable{
     public static final int ARD_ELEV_ADDR = 0x01;
     public static final int ARD_ROBOT_ADDR = 0x02;
     
-    //
-    public static boolean elevatorFlag = false;
-    public static boolean roerobotFlag = false;
     
     //I2C bus line used(on odroid)
     public static final int I2CBUS = 4;
 
+    //I2C devices
     public I2CDevice ardElevator = null;
     public I2CDevice ardRobot = null;
     
@@ -48,11 +46,59 @@ public class I2Cdev implements Runnable{
     @Override
     public void run() {
         
-        ardElevator = initiate(I2CBUS, ARD_ELEV_ADDR);
         
              
     }
 
+    /**
+     * Read data using the specified device and parameters
+     * @param i2cdev I2C device to read from
+     * @param readAddress Which address to read values from
+     * @param bufferSize Size of the buffer
+     * @return The read buffer
+     */
+    public byte[] readData(I2CDevice i2cdev, int readAddress, int bufferSize)
+    {
+        //Variable specifications for the i2c reading
+        int offset = 0;
+        //Buffer to hold values read
+     byte[] buffer = null;
+        
+        try {
+            i2cdev.read(readAddress, buffer, offset , bufferSize);
+        } catch (IOException ex) {
+            Logger.getLogger(I2Cdev.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.toString());
+        }
+        
+        return buffer;
+    }
+    
+    /**
+     * Device to write data to
+     * @param i2cdev i2c device to wrtie to
+     * @param writeAddress address to write to 
+     * @param bufferSize buffer size
+     * @return Returns NOT NULL if no errors were thrown during writing
+     */
+       public byte[] writeData(I2CDevice i2cdev, int writeAddress, int bufferSize)
+        {
+            //Flag to check if writing was completed
+             byte [] buffer = null;
+            
+        //Variable specifications for the i2c reading
+        int offset = 0;
+      //Does the writing to the i2c device, and sets the return statement
+        try {
+            i2cdev.write(writeAddress, buffer, offset , bufferSize);
+        } catch (IOException ex) {
+            Logger.getLogger(I2Cdev.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.toString());
+        }
+
+        return buffer;
+    }
+    
     
     
     /**
