@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package ImageProcessing;
+
 /**
  *
  * @author KristianAndreLilleindset
  */
-public class HMI {
+public class ImageProcessing {
     
 }

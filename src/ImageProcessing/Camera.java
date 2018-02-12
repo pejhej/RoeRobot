@@ -6,7 +6,7 @@
 package ImageProcessing;
 /**
  *
- * @author krist
+ * @author KristianAndreLilleindset
  */
 public class Camera {
     
