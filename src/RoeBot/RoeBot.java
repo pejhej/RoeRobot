@@ -45,6 +45,7 @@ public class RoeBot
         this.threadPool = Executors.newScheduledThreadPool(THREADS_IN_POOL);
         
         this.I2CCommunication = new Communication();
+        this.I2CCommunication.run();
         
         this.humanMachineInterface = new HMI();
         
