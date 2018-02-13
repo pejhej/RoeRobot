@@ -9,7 +9,7 @@ package roerobot;
  *
  * @author PerEspen
  */
-public class RoeRobot {
+public class RoeBot {
 
     /**
      * @param args the command line arguments
