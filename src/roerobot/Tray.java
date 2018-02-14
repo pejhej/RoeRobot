@@ -14,34 +14,18 @@ package roerobot;
  */
 public class Tray {
 
-    private final int width, hight, depth; // defined in mm 
-    private int upperPos, lowerPos;        // defined in mm parallel to the Z-axis 
+    private final int width, depth; // defined in mm 
+    private final int distUpperLowerPos; // Distanse form the upper position to the lowest point in the tray
+    private final int upperPos; // defined in mm parallel to the Z-axis 
+    private final int lowerPos; // defined in mm parallel to the Z-axis
     private int nrOfRemovedRoe;
 
-    public Tray(int width, int hight, int depth) {
+    public Tray(int width, int depth, int distUpperLowerPos, int upperPos) {
         this.width = width;
-        this.hight = hight;
         this.depth = depth;
-    }
-
-    /**
-     * Set upper position setts the upper position of the tray relative to a
-     * global coordinatsystem defined in mm
-     *
-     * @param upperPos
-     */
-    public void setUpperPos(int upperPos) {
+        this.distUpperLowerPos = distUpperLowerPos;
         this.upperPos = upperPos;
-    }
-
-    /**
-     * Set lower positon setts the lower position of the tray relative to a
-     * global coordinatsystem defined in mm
-     *
-     * @param lowerPos
-     */
-    public void setLowerPos(int lowerPos) {
-        this.lowerPos = lowerPos;
+        this.lowerPos = this.upperPos - this.distUpperLowerPos;
     }
 
     /**
@@ -55,13 +39,22 @@ public class Tray {
     }
 
     /**
-     * Get lower position Returns the lower limit position of the tray defined
+     * Get lower position returns the lower limit position of the tray defined
      * in mm from the bottom of a global coordinat system
      *
-     * @return int with lower positon.
+     * @return
      */
     public int getLowerPos() {
         return lowerPos;
+    }
+
+    /**
+     * Get distanse between upper and lower position
+     *
+     * @return int with lower positon.
+     */
+    public int getDistUpperLowerPos() {
+        return distUpperLowerPos;
     }
 
     /**
@@ -85,6 +78,7 @@ public class Tray {
 
     /**
      * Get width returns the width of the tray
+     *
      * @return width of tray
      */
     public int getWidth() {
@@ -92,15 +86,8 @@ public class Tray {
     }
 
     /**
-     * Get hight returns the width of the tray
-     * @return hight of tray
-     */
-    public int getHight() {
-        return hight;
-    }
-
-    /**
      * Get depth returns the width of the tray
+     *
      * @return depth of tray
      */
     public int getDepth() {
