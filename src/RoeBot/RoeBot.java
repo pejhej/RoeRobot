@@ -5,7 +5,7 @@ import GUI.HMI;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import ImageProcessing.ImageProcessing;
-import roerobot.Logics;
+import roerobot.RoeRobot;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,7 +29,7 @@ public class RoeBot
     private Communication I2CCommunication; 
     private HMI humanMachineInterface; 
     private ImageProcessing imageProcessing;
-    private Logics roeRobot;
+    private RoeRobot roeRobot;
  
     public static void main(String[] args)
     {
@@ -45,12 +45,13 @@ public class RoeBot
         this.threadPool = Executors.newScheduledThreadPool(THREADS_IN_POOL);
         
         this.I2CCommunication = new Communication();
+        this.I2CCommunication.run();
         
         this.humanMachineInterface = new HMI();
         
         this.imageProcessing = new ImageProcessing();
         
-        this.roeRobot = new Logics();
+        this.roeRobot = new RoeRobot();
         
     }
 }
