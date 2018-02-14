@@ -9,6 +9,25 @@ package roerobot;
  *
  * @author Yngve
  */
-public class RoeRobot {
-
+public class RoeRobot implements Runnable{
+    private CoordinateSystem coordSyst; 
+    private RackRegiser rackRegister; 
+    
+    
+    
+    @Override
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    /**
+     * Adds trays to register. 
+     * 
+     */
+    private void addTrayToRack(){
+        Tray tray = new Tray(100, 100, 100);
+        this.rackRegister.addToRegister(tray);
+    }
+    
 }
