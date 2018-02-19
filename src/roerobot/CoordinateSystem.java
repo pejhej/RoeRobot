@@ -13,15 +13,30 @@ package roerobot;
  */
 public class CoordinateSystem {
 
-    private final int XUpperLimit, YUpperLimit, ZUpperLimit;
+    private int XUpperLimit = 0, YUpperLimit = 0, ZUpperLimit = 0;
     private final int XLowerLimit = 0, YLowerLimit = 0, ZLowerLimit = 0;
+    private boolean isCalibrated; 
 
-    public CoordinateSystem(int XUpperLimit, int YUpperLimit, int ZUpperLimit) {
-        this.XUpperLimit = XUpperLimit;
-        this.YUpperLimit = YUpperLimit;
-        this.ZUpperLimit = ZUpperLimit;
+    public CoordinateSystem() {
+    }
+    
+    public boolean isCalibrated(){
+        this.isCalibrated = !(this.XUpperLimit == 0 && this.YUpperLimit == 0 && this.ZUpperLimit == 0);
+        return this.isCalibrated;
     }
 
+    public void setXUpperLimit(int XUpperLimit) {
+        this.XUpperLimit = XUpperLimit;
+    }
+
+    public void setYUpperLimit(int YUpperLimit) {
+        this.YUpperLimit = YUpperLimit;
+    }
+
+    public void setZUpperLimit(int ZUpperLimit) {
+        this.ZUpperLimit = ZUpperLimit;
+    }
+    
     /**
      * @return X upper limit
      */
